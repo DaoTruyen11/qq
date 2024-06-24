@@ -1,0 +1,57 @@
+<nav class="main-nav" th:fragment="header">
+    <img th:src="@{/images/logo/logo1.png}" alt="MediQuirk" class="logo">
+    <p>MediQuirk</p>
+    <ul class="left-menu">
+        <li><a th:href="@{/}">Trang chủ</a></li>
+        <li><a href="#">Danh mục</a></li>
+    </ul>
+
+
+    <ul class="right-menu">
+        <li>
+            <a  class="btn" href="#">
+                <i class="bi bi-search"></i>
+            </a>
+        </li>
+        <li>
+            <a  class="btn" th:href="/cart">
+                <i class="bi bi-cart3"></i>
+            </a>
+
+        </li>
+        <li>
+            <a class="btn" href="/login" sec:authorize="!isAuthenticated()">Login</a>
+            <span class="nav-item flex align-items-center" sec:authorize="isAuthenticated()">
+                <span class="navbar-text user-icon">
+                    <i class="bi bi-person-circle btn"></i>
+                </span>
+                <ul class="submenu">
+                    <li>
+                        <span class="navbar-text">
+                            Xin chào, <span sec:authentication="name"></span>
+                        </span>
+                    </li>
+                    <li><a href="#">UserProfile</a></li>
+                    <li><a href="#">Setting</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button class="btn" type="submit">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </span>
+        </li>
+<!--        <li>-->
+<!--            <a class="btn" href="/login" sec:authorize="!isAuthenticated()">Login</a>-->
+<!--            <span class="nav-item flex align-items-center" sec:authorize="isAuthenticated()">-->
+<!--                <span class="navbar-text">-->
+<!--                    Xin chào, <span sec:authentication="name" class="mr-4"></span>-->
+<!--                </span>-->
+<!--            </span>-->
+<!--&lt;!&ndash;            <a class="btn btn-outline-light" href="/register" sec:authorize="!isAuthenticated()">Register</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="btn btn-outline-light" type="submit">Logout</button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--        </li>-->
+    </ul>
+</nav>

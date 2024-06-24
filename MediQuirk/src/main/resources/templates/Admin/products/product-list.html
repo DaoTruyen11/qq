@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/Admin/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Custom styles for scrollable table */
+        .table-container {
+            max-height: 500px; /* Chiều cao tối đa của bảng */
+            overflow-y: auto; /* Hiển thị thanh cuộn dọc khi nội dung vượt quá chiều cao tối đa */
+        }
+
+        .product-image {
+            max-width: 100px; /* Giới hạn chiều rộng tối đa của hình ảnh */
+            max-height: 100px; /* Giới hạn chiều cao tối đa của hình ảnh */
+            object-fit: cover; /* Đảm bảo hình ảnh được cắt tỉa để vừa khớp với kích thước giới hạn */
+            border-radius: 8px; /* Bo tròn góc của hình ảnh */
+        }
+    </style>
+</head>
+
+
+<section layout:fragment="content" class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- Title -->
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-3xl text-primary">Product Management</h1>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3 px-3 mt-5">
+        <div class="input-group w-25">
+            <input type="text" class="form-control" placeholder="Search ...">
+            <button class="btn btn-light border border-secondary " type="button" style="border-left: none; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+        <a th:href="@{/products/add}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md">Add
+            New Product</a>
+    </div>
+
+
+    <!-- Product Table with Scrollbar -->
+    <div class="table-container">
+        <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-md">
+            <thead class="bg-gray-50">
+            <tr class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3">ID</th>
+                <th scope="col" class="px-6 py-3">Image</th>
+                <th scope="col" class="px-6 py-3">Name</th>
+                <th scope="col" class="px-6 py-3">Description</th>
+                <th scope="col" class="px-6 py-3">Price</th>
+                <th scope="col" class="px-6 py-3">Prescription Required</th>
+                <th scope="col" class="px-6 py-3">Category</th>
+                <th scope="col" class="px-6 py-3">Supplier</th>
+                <th scope="col" class="px-6 py-3">Actions</th>
+                <th scope="col" class="px-6 py-3">Add To Cart</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <!-- Replace with Thymeleaf loop for actual data -->
+            <tr th:each="product : ${products}" class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
+                    th:text="${product.productId}">1
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <img th:src="@{/images/medicine/} + ${product.imageUrl}" alt="Product Image"
+                         class="product-image">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${product.productName}">Product
+                    Name
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${product.description}">Product
+                    Description
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${product.price}">$99.99</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <span th:text="${product.prescriptionRequired} ? 'Yes' : 'No'">Yes</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    th:text="${product.category.categoryName}">Category Name
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    th:text="${product.supplier.supplierName}">Supplier Name
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <a th:href="@{/products/edit/{id}(id=${product.productId})}"
+                       class="text-indigo-600 hover:text-indigo-900 mr-2">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a th:href="@{/products/delete/{id}(id=${product.productId})}"
+                       class="text-red-600 hover:text-red-900"
+                       onclick="return confirm('Are you sure you want to delete this product?');">
+                        <i class="bi bi-trash3"></i> Delete
+                    </a>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <form th:action="@{/cart/add}" method="post">
+                        <input type="number" name="quantity" min="1" value="1"
+                               class="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                        <input type="hidden" name="productId" th:value="${product.productId}">
+                        <button type="submit"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md shadow-md">
+                            Add to Cart
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <!-- End example product row -->
+
+            <!-- Replace with Thymeleaf loop for actual data -->
+            </tbody>
+        </table>
+    </div>
+
+</section>
+</html>

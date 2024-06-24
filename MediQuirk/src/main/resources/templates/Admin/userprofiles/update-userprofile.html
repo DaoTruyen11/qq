@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update UserProfile</title>
+</head>
+<body>
+<h2>Update UserProfile</h2>
+<form th:action="@{/userprofiles/update/{id}(id=${userProfile.userProfileId})}" th:object="${userProfile}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" />
+    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect first name</div>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" />
+    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect last name</div>
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" th:field="*{gender}" />
+    <div th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Incorrect gender</div>
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="text" id="dateOfBirth" th:field="*{dateOfBirth}" />
+    <div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">Incorrect date of birth</div>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" th:field="*{address}" />
+    <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Incorrect address</div>
+
+    <label for="profilePictureUrl">Profile Picture URL:</label>
+    <input type="text" id="profilePictureUrl" th:field="*{profilePictureUrl}" />
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

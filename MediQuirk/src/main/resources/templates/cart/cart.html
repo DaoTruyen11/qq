@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .product-img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+        .cart-summary {
+            margin-top: 2rem;
+        }
+        .cart-summary .card-body {
+            background-color: #f8f9fa;
+        }
+        .cart-summary .btn {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Shopping Cart</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Images</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Iterate through cartItems -->
+                <tr th:each="item : ${cartItems}">
+                    <td>
+                        <img th:src="@{${item.product.imageUrl}}" class="img-fluid product-img" alt="Product Image">
+                    </td>
+                    <td>
+                        <h5 class="mt-0 mb-1" th:text="${item.product.productName}"></h5>
+
+                    </td>
+                    <td>
+                        <form th:action="@{/cart/increase}" method="post" class="d-inline">
+                            <input type="hidden" name="productId" th:value="${item.product.productId}"/>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                        </form>
+                        <span th:text="${item.quantity}" class="mx-2"></span>
+                        <form th:action="@{/cart/decrease}" method="post" class="d-inline">
+                            <input type="hidden" name="productId" th:value="${item.product.productId}"/>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">-</button>
+                        </form>
+                    </td>
+                    <td th:text="${item.product.price}"></td>
+                    <td th:text="${item.product.price * item.quantity}"></td>
+                    <td>
+                        <form th:action="@{/cart/remove/{productId}(productId=${item.product.productId})}" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 cart-summary">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Cart Summary</h5>
+                    <p>Total items: <span th:text="${totalItems}"></span></p>
+                    <p>Total price: <span th:text="${totalPrice}"></span></p>
+                    <hr>
+                    <form th:action="@{/cart/checkout}" method="post">
+                        <button type="submit" class="btn btn-outline-success btn-block">Check out</button>
+                    </form>
+                    <form th:action="@{/cart/clear}" method="post">
+                        <button type="submit" class="btn btn-outline-danger btn-block">Clear Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

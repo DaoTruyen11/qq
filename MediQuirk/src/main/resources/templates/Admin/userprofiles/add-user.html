@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add User</title>
+</head>
+<body>
+<h2>Add User</h2>
+<form th:action="@{/userprofiles/{userProfileId}/add-user(userProfileId=${userProfileId})}" th:object="${user}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" th:field="*{username}" />
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect username</div>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" th:field="*{password}" />
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" />
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</div>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" th:field="*{phone}" />
+    <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Incorrect phone</div>
+
+    <button type="submit">Add User</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/User/layout}">
+<body>
+<section layout:fragment="content">
+        <div class="main-wrapper">
+            <div class="popular-medicines">
+                <div class="main-menu">
+                    <div class="genre">Phổ biến theo từng loại</div>
+                    <div class="medicine-types">
+                        <a href="#" class="medicine-type active"> Tất cả</a>
+                        <a href="#" class="medicine-type">Thuốc</a>
+                        <a href="#" class="medicine-type"> Thực phẩm chức năng</a>
+                        <a href="#" class="medicine-type"> Chăm sóc cá nhân</a>
+                        <a href="#" class="medicine-type"> Chăm sóc sắc đẹp</a>
+                    </div>
+                </div>
+                <div class="medicine-cards">
+                    <div class="medicine-card">
+                        <div class="content-wrapper">
+                            <img th:src="@{/images/medicine/ensure.jpg}"
+                                 alt="" class="medicine-card-img">
+                            <div class="card-content">
+                                <div class="medicine-name">Sữa bột Ensure</div>
+                                <div class="medicine-by">Thương hiệu: Abbott</div>
+                                <div class="rate">
+                                    <fieldset class="rating medicine-rate">
+                                        <input type="checkbox" id="star-c1" name="rating" value="5">
+                                        <label class="full" for="star-c1"></label>
+                                        <input type="checkbox" id="star-c2" name="rating" value="4">
+                                        <label class="full" for="star-c2"></label>
+                                        <input type="checkbox" id="star-c3" name="rating" value="3">
+                                        <label class="full" for="star-c3"></label>
+                                        <input type="checkbox" id="star-c4" name="rating" value="2">
+                                        <label class="full" for="star-c4"></label>
+                                        <input type="checkbox" id="star-c5" name="rating" value="1">
+                                        <label class="full" for="star-c5"></label>
+                                    </fieldset>
+                                    <!--                                    <span class="medicine-voters card-vote">1.987 voters</span>-->
+                                </div>
+                                <!--                                <div class="medicine-sum card-sum">Readers of all ages and walks of life have drawn-->
+                                <!--                                    inspiration and empowerment from Elizabeth Gilbert’s medicines for years.-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<nav class="main-menu" th:fragment="sidebar">
+    <h1>MediQuirk</h1>
+    <img class="logo" th:src="@{/images/logo/logo.png}" alt="MediQuirk Logo"/>
+    <ul>
+        <li class="nav-item active" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/admin}" >
+                <i class="bi bi-house nav-icon"></i>
+                <span class="nav-text">Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/products}">
+                <i class="bi bi-capsule nav-icon"></i>
+                <span class="nav-text">Medicines</span>
+            </a>
+        </li>
+
+        <li class="nav-item" t>
+            <b></b>
+            <b></b>
+            <a th:href="@{/categories}">
+                <i class="bi bi-receipt nav-icon"></i>
+                <span class="nav-text">Categories</span>
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/activities}">
+                <i class="bi bi-cart3 nav-icon"></i>
+                <span class="nav-text">Orders</span>
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/userprofiles}">
+                <i class="bi bi-person nav-icon"></i>
+                <span class="nav-text">Users</span>
+            </a>
+        </li>
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/users}">
+                <i class="bi bi-person nav-icon"></i>
+                <span class="nav-text">Account</span>
+            </a>
+        </li>
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/suppliers}">
+                <i class="bi bi-building nav-icon"></i>
+                <span class="nav-text">Suppliers</span>
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/settings}">
+                <i class="bi bi-gear nav-icon"></i>
+                <span class="nav-text">Settings</span>
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <b></b>
+            <b></b>
+            <a th:href="@{/settings}">
+                <i class="bi bi-box-arrow-left nav-icon"></i>
+                <span class="nav-text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</nav>

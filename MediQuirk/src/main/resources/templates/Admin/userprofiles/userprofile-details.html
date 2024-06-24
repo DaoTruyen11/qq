@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>UserProfile Details</title>
+</head>
+<body>
+<h2>UserProfile Details</h2>
+<div>
+    <p>First Name: <span th:text="${userProfile.firstName}"></span></p>
+    <p>Last Name: <span th:text="${userProfile.lastName}"></span></p>
+    <p>Gender: <span th:text="${userProfile.gender}"></span></p>
+    <p>Date of Birth: <span th:text="${userProfile.dateOfBirth}"></span></p>
+    <p>Address: <span th:text="${userProfile.address}"></span></p>
+    <p>Profile Picture: <img th:src="${userProfile.profilePictureUrl}" alt="Profile Picture" /></p>
+</div>
+
+<h2>User Details</h2>
+<div th:if="${user != null}">
+    <p>Username: <span th:text="${user.username}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <p>Phone: <span th:text="${user.phone}"></span></p>
+    <p>Is Active: <span th:text="${user.IsActive}"></span></p>
+</div>
+<div th:if="${user == null}">
+    <p>No associated user account.</p>
+</div>
+</body>
+</html>

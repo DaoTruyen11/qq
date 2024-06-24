@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/Admin/layout}">
+<body>
+<section layout:fragment="content" class="max-w-4xl mx-auto p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md">
+    <div class="bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <h2 class="text-3xl font-semibold mb-8 text-center">Add New User Profile</h2>
+            <form action="/userprofiles/add" th:object="${userProfile}" method="post" enctype="multipart/form-data"
+                  class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="firstName" class="block text-sm font-medium mb-2">First Name:</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Enter first name"
+                           class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required>
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('firstName')}"
+                         th:errors="*{firstName}"></div>
+                </div>
+                <div>
+                    <label for="lastName" class="block text-sm font-medium mb-2">Last Name:</label>
+                    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Enter last name"
+                           class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required>
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('lastName')}"
+                         th:errors="*{lastName}"></div>
+                </div>
+                <div>
+                    <label for="gender" class="block text-sm font-medium mb-2">Gender:</label>
+                    <select th:field="*{gender}" id="gender"
+                            class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('gender')}"
+                         th:errors="*{gender}"></div>
+                </div>
+                <div>
+                    <label for="dateOfBirth" class="block text-sm font-medium mb-2">Date of Birth:</label>
+                    <input type="date" th:field="*{dateOfBirth}" id="dateOfBirth" placeholder="Enter date of birth (YYYY-MM-DD)"
+                           class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                           required>
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('dateOfBirth')}"
+                         th:errors="*{dateOfBirth}"></div>
+                </div>
+                <div class="col-span-2">
+                    <label for="address" class="block text-sm font-medium mb-2">Address:</label>
+                    <textarea th:field="*{address}" id="address" placeholder="Enter address" rows="3"
+                              class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                              required></textarea>
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('address')}"
+                         th:errors="*{address}"></div>
+                </div>
+                <div class="col-span-2">
+                    <label for="profilePicture" class="block text-sm font-medium mb-2">Profile Picture:</label>
+                    <input type="file" name="file" id="profilePicture"
+                           class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <div class="text-red-500 text-xs mt-1" th:if="${#fields.hasErrors('profilePictureUrl')}"
+                         th:errors="*{profilePictureUrl}"></div>
+                </div>
+                <div class="col-span-2 flex justify-center mt-8">
+                    <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        Add User Profile
+                    </button>
+                    <a href="/userprofiles"
+                       class="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
